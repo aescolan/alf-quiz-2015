@@ -1,2 +1,0 @@
-Proyecto heroku: https://quiz-2015-alf.herokuapp.com/
-Proyecto github: https://github.com/aescolan/alf-quiz-2015/ 
