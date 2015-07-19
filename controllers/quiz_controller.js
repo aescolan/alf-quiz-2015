@@ -47,21 +47,20 @@ exports.new = function(req, res) {
 	res.render('quizes/new', {quiz: quiz, errors: []});
 	};
 
+	// POST /quizes/create
+	exports.create = function(req, res) {
+	  var quiz = models.Quiz.build( req.body.quiz );
 
-// POST /quizes/create
-exports.create = function(req, res) {
-  var quiz = models.Quiz.build( req.body.quiz );
-
-  var err_object = quiz.validate();
-  if (err_object) {
-  		var err_array = Object.keys(err_object).map(function (key) {return {message: err_object[key]};});
-        res.render('quizes/new', {quiz: quiz, errors: err_array});
-  } else {
-  		quiz // save: guarda en DB campos pregunta y respuesta de quiz
-        .save({fields: ["pregunta", "respuesta", "tema"]})
-        .then( function(){ res.redirect('/quizes')})
-  }      // res.redirect: Redirección HTTP a lista de preguntas
-};
+	  var err_object = quiz.validate();
+	  if (err_object) {
+	  		var err_array = Object.keys(err_object).map(function (key) {return {message: err_object[key]};});
+	        res.render('quizes/new', {quiz: quiz, errors: err_array});
+	  } else {
+	  		quiz // save: guarda en DB campos pregunta y respuesta de quiz
+					.save({fields: ["pregunta", "respuesta", "tema"]})
+	        .then( function(){ res.redirect('/quizes')})
+	  }      // res.redirect: Redirección HTTP a lista de preguntas
+	};
 
 // GET /quizes/:id/edit
 exports.edit = function(req, res){
