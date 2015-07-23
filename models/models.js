@@ -60,12 +60,12 @@ sequelize.sync().success(function() {
 			Quiz.create({
 				pregunta: 'Capital de Italia',
 				respuesta: 'Roma',
-				indice: 'Otro'
+				tema: 'Otro'
 			});
 			Quiz.create({
 				pregunta: 'Capital de Portugal',
 				respuesta: 'Lisboa',
-				indice: 'Ciencia'
+				tema: 'Ciencia'
 			})
 		.success(function () { console.log('Base de datos inicializada'); });
 		};
