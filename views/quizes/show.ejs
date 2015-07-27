@@ -5,8 +5,18 @@
 </form>
 
 <p> <a href="/quizes/<%= quiz.id %>/comments/new"><button class="btn btn-primary btn-sm"> Nuevo comentario </button></a></p>
-<br/>
-<p><strong> Comentarios: </strong></p>
-<%for (index in quiz.Comments) {%>
-		<p>- <%=quiz.Comments[index].texto1%></p>
+
+<p><br/><strong> Comentarios: </strong></p>
+
+<%if (quiz.comments.length > 0 ) {%>
+	<p><br/><strong>Comentarios:</strong></p>
+	<%for(index in quiz.comments) { %>
+		<% if (quiz.comments[index].publicado || session.user) { %>
+			<p>-<%=quiz.comments[index].texto%>&nbsp;
+			<% if (session.user && !quiz.comments[index].publicado) { %>
+				<a href="/quizes/<%=quiz.id%>/comments/<%=quiz.comments[index].id%>/publish"><button>Publicar</button></a>
+			<%}%>
+			</p>
+		<%}%>
+	<%}%>
 <%}%>
