@@ -7,9 +7,8 @@ var bodyParser = require('body-parser');
 var partials = require('express-partials');
 var methodOverride = require('method-override');
 var session = require('express-session');
-
+var sessionController = require('./controllers/session_controller');
 var routes = require('./routes/index');
-
 var app = express();
 
 // view engine setup
@@ -27,6 +26,9 @@ app.use(cookieParser('Quiz 2015'));
 app.use(session());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Control de caducidad de la sesión
+app.use(sessionController.autoLogout)
 
 // Helpers dinamicos
 app.use(function(req, res, next){
@@ -75,6 +77,5 @@ app.use(function(err, req, res, next) {
         errors: []
     });
 });
-
 
 module.exports = app;
